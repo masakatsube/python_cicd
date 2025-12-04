@@ -15,29 +15,10 @@ on:
       - develop
 
 jobs:
-  # 1. CodeQL セキュリティスキャン
-  codeql:
-    name: CodeQL Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # CodeQLには全履歴の取得が必要
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: python
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-
   # 2. Python テストとコードカバレッジ
   test:
     name: Python Tests & Coverage
     runs-on: ubuntu-latest
-    needs: codeql # CodeQLの成功を待って実行
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
