@@ -14,6 +14,11 @@ on:
       - main
       - develop
 
+permissions:
+  contents: read      # リポジトリの内容を読み取る権限 (Checkout, CodeQL, Buildに必要)
+  security-events: write # CodeQLの結果をGitHub Securityに書き込む権限
+  actions: read        # ワークフローや実行状況を読み取る権限 (エラーメッセージの解消に繋がる可能性が高い)
+
 jobs:
   # 1. CodeQL セキュリティスキャン
   codeql:
