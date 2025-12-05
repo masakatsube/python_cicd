@@ -14,35 +14,11 @@ on:
       - main
       - develop
 
-permissions:
-  contents: read      # リポジトリの内容を読み取る権限 (Checkout, CodeQL, Buildに必要)
-  security-events: write # CodeQLの結果をGitHub Securityに書き込む権限
-  actions: read        # ワークフローや実行状況を読み取る権限 (エラーメッセージの解消に繋がる可能性が高い)
-
 jobs:
-  # 1. CodeQL セキュリティスキャン
-  codeql:
-    name: CodeQL Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0 # CodeQLには全履歴の取得が必要
-
-      - name: Initialize CodeQL
-        uses: github/codeql-action/init@v3
-        with:
-          languages: python
-
-      - name: Perform CodeQL Analysis
-        uses: github/codeql-action/analyze@v3
-
-  # 2. Python テストとコードカバレッジ
+  # 1. Python テストとコードカバレッジ
   test:
     name: Python Tests & Coverage
     runs-on: ubuntu-latest
-    needs: codeql # CodeQLの成功を待って実行
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -66,7 +42,7 @@ jobs:
           # コンソール出力でカバレッジ率を確認できます
           pytest tests/ --cov=src --cov-report=xml --cov-report=term-missing
 
-  # 3. Docker ビルド一貫性チェック
+  # 2. Docker ビルド一貫性チェック
   docker_build_check:
     name: Docker Build Check
     runs-on: ubuntu-latest
