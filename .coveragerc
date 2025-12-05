@@ -1,0 +1,8 @@
+[report]
+# 全体カバレッジがこの値を下回ると、pytest-covは失敗する
+fail_under = 85 
+
+# 詳細なレポートを出力しない
+omit =
+    *tests/*
+    *venv/*
