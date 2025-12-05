@@ -1,14 +1,6 @@
 name: CI - Test & Build Check
 
 on:
-  push:
-    branches:
-      # Gitflowの主要ブランチと作業ブランチでCIを実行
-      - main
-      - develop
-      - 'feature/**'
-      - 'release/**'
-      - 'hotfix/**'
   pull_request:
     branches:
       - main
