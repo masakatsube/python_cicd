@@ -8,7 +8,7 @@ on:
 
 permissions:
   contents: read      # コード読み取り（チェックアウトに必要）
-  actions: read       # CIステータス読み取りに必要（前回追加済み）
+  actions: read       # CIステータス読み取りに必要
   issues: write       # PRコメント投稿、Issue作成/コメントに必要
   pull-requests: write # PRのラベルやレビューなど、より広範な操作に必要（issues: writeでコメントは可能ですが、念のため）
 
