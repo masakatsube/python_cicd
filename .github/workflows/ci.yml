@@ -34,6 +34,14 @@ jobs:
           # コンソール出力でカバレッジ率を確認できます
           pytest tests/ --cov=src --cov-report=xml --cov-report=term-missing
 
+      - name: Code Coverage Summary Report
+        uses: irongut/CodeCoverageSummary@v1.3.0
+        with:
+          filename: 'coverage/*/coverage.cobertura.xml'
+          badge: true
+          format: 'markdown'
+          output: 'both'
+
   # 2. Docker ビルド一貫性チェック
   docker_build_check:
     name: Docker Build Check
