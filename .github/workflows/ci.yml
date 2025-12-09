@@ -1,27 +1,27 @@
 name: CI - Test & Build Check
 
 on:
-  push:
-    branches:
-      # Gitflowの主要ブランチと作業ブランチでCIを実行
-      - main
-      - develop
-      - 'feature/**'
-      - 'release/**'
-      - 'hotfix/**'
   pull_request:
     branches:
       - main
       - develop
 
+permissions:
+  contents: read      # コード読み取り（チェックアウトに必要）
+  actions: read       # CIステータス読み取りに必要
+  issues: write       # PRコメント投稿、Issue作成/コメントに必要
+  pull-requests: write # PRのラベルやレビューなど、より広範な操作に必要（issues: writeでコメントは可能ですが、念のため）
+
 jobs:
-  # 2. Python テストとコードカバレッジ
+  # 1. Python テストとコードカバレッジ
   test:
     name: Python Tests & Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -42,7 +42,27 @@ jobs:
           # コンソール出力でカバレッジ率を確認できます
           pytest tests/ --cov=src --cov-report=xml --cov-report=term-missing
 
-  # 3. Docker ビルド一貫性チェック
+ #     - name: Code Coverage Summary Report
+ #       uses: irongut/CodeCoverageSummary@v1.3.0
+ #       with:
+ #         filename: 'coverage.xml'
+ #         badge: true
+ #         format: 'markdown'
+ #         output: 'both'
+
+ #     - name: Add Coverage PR Comment
+ #       uses: marocchino/sticky-pull-request-comment@v2
+ #       if: github.event_name == 'pull_request'
+ #       with:
+ #         recreate: true
+ #         path: code-coverage-results.md
+#
+      - name: Collect metrics and report by octocov
+        uses: k1LoW/octocov-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  # 2. Docker ビルド一貫性チェック
   docker_build_check:
     name: Docker Build Check
     runs-on: ubuntu-latest
