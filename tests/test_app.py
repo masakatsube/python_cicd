@@ -1,10 +1,7 @@
 # tests/test_app.py
-import pytest
-# src/app.py から get_message をインポートする
-from src.app import get_message 
+from src.app import calculate_sum, is_even # is_evenをインポートしておく
 
-def test_get_message_with_name():
-    assert get_message("Alice") == "Hello, Alice!"
-
-def test_get_message_with_empty_name():
-    assert get_message(None) == "Hello, World!"
+def test_calculate_sum():
+    # 既存のテストを修正せず、そのままにする
+    assert calculate_sum(1, 2) == 3
+    assert calculate_sum(-1, 1) == 0

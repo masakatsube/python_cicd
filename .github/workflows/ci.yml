@@ -59,8 +59,6 @@ jobs:
 #
       - name: Collect metrics and report by octocov
         uses: k1LoW/octocov-action@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   # 2. Docker ビルド一貫性チェック
   docker_build_check:
