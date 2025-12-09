@@ -40,21 +40,21 @@ jobs:
           # コンソール出力でカバレッジ率を確認できます
           pytest tests/ --cov=src --cov-report=xml --cov-report=term-missing
 
-      - name: Code Coverage Summary Report
-        uses: irongut/CodeCoverageSummary@v1.3.0
-        with:
-          filename: 'coverage.xml'
-          badge: true
-          format: 'markdown'
-          output: 'both'
+ #     - name: Code Coverage Summary Report
+ #       uses: irongut/CodeCoverageSummary@v1.3.0
+ #       with:
+ #         filename: 'coverage.xml'
+ #         badge: true
+ #         format: 'markdown'
+ #         output: 'both'
 
-      - name: Add Coverage PR Comment
-        uses: marocchino/sticky-pull-request-comment@v2
-        if: github.event_name == 'pull_request'
-        with:
-          recreate: true
-          path: code-coverage-results.md
-
+ #     - name: Add Coverage PR Comment
+ #       uses: marocchino/sticky-pull-request-comment@v2
+ #       if: github.event_name == 'pull_request'
+ #       with:
+ #         recreate: true
+ #         path: code-coverage-results.md
+#
       - name: Collect metrics and report by octocov
         uses: k1LoW/octocov-action@v1
         with:
