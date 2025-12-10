@@ -9,3 +9,5 @@ report:
 diff:
   datastores:
     - artifact://${GITHUB_REPOSITORY}
+coverage:
+  acceptable: 30%
