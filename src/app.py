@@ -11,3 +11,6 @@ def is_even(number):
         return True
     else:
         return False
+
+def calculate_sum2(a, b):
+    return a - b
