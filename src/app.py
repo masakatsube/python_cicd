@@ -1,16 +1,13 @@
-# src/app.py
+# src/app.py の新しい内容
+def greet(user_name):
+    # 既存のロジック (テスト済みと仮定)
+    return f"Hello, {user_name}!"
 
-def calculate_sum(a, b):
-    """二つの数の和を計算する関数"""
-    return a + b
-
-# 👇 【変更点1】既存のファイルに新しい関数を追加
-def is_even(number):
-    """数が偶数であるか判定する関数"""
-    if number % 2 == 0:
-        return True
+def check_age(age):
+    """
+    ユーザーが成人かどうかをチェックする。
+    """
+    if age >= 20: # <--- 変更行 (新しいロジック)
+        return "Adult"
     else:
-        return False
-
-def calculate_sum2(a, b):
-    return a - b
+        return "Minor" # <--- 変更行 (新しいロジック)
