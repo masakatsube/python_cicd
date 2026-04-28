@@ -1,7 +1,12 @@
-# tests/test_app.py
-from src.app import calculate_sum, is_even # is_evenをインポートしておく
+# tests/test_app.py の追記
 
-def test_calculate_sum():
-    # 既存のテストを修正せず、そのままにする
-    assert calculate_sum(1, 2) == 3
-    assert calculate_sum(-1, 1) == 0
+from src.app import greet, check_age # check_age をインポート
+
+def test_greet_success():
+    assert greet("Alice") == "Hello, Alice!"
+
+# ⬇️ 新しく追加するテスト ⬇️
+
+def test_check_age_adult():
+    # 成人 (>= 20) のパスをテスト
+    assert check_age(25) == "Adult"
