@@ -21,6 +21,6 @@ jobs:
       pull-requests: write # autolabelerを使う場合は必要
     runs-on: ubuntu-latest
     steps:
-      - uses: release-drafter/release-drafter@v6
+      - uses: release-drafter/release-drafter@v7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
